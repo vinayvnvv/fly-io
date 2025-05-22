@@ -29,17 +29,17 @@ const OpenInterest = () => {
       const current = getCurrentMinutesFromStart();
       if (current !== null) {
         // Set slider from 9:15 to current time
-        setValue([0, current]);
+        setTimeRange([0, current]);
       } else {
         // Outside trading hours, reset to default
-        setValue(defaultRange);
+        setTimeRange(defaultRange);
       }
     }, 60 * 1000); // update every minute
 
     // Initial run immediately
     const current = getCurrentMinutesFromStart();
     if (current !== null) {
-      setValue([0, current]);
+      setTimeRange([0, current]);
     }
 
     return () => clearInterval(interval);
