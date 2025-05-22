@@ -30,16 +30,19 @@ const OpenInterest = () => {
       if (current !== null) {
         // Set slider from 9:15 to current time
         setTimeRange([0, current]);
+        setTimeRangeValue([0, current]);
       } else {
         // Outside trading hours, reset to default
         setTimeRange(defaultRange);
+        setTimeRangeValue([0, current]);
       }
-    }, 60 * 1000); // update every minute
+    }, 20 * 1000); // update every minute
 
     // Initial run immediately
     const current = getCurrentMinutesFromStart();
     if (current !== null) {
       setTimeRange([0, current]);
+      setTimeRangeValue([0, current]);
     }
 
     return () => clearInterval(interval);
@@ -62,7 +65,7 @@ const OpenInterest = () => {
                   value={timeRangeValue}
                   onChange={(_, v) => setTimeRangeValue(v)}
                   onChangeCommitted={handleRangeChange}
-                  valueLabelDisplay="auto"
+                  valueLabelDisplay="on"
                   min={0}
                   max={totalMinutes}
                   valueLabelFormat={formatTime}
