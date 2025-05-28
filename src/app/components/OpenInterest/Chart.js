@@ -13,6 +13,7 @@ import {
   BarChart,
   BarPlot,
   ChartContainer,
+  ChartsGrid,
   ChartsReferenceLine,
   ChartsXAxis,
   ChartsYAxis,
@@ -164,6 +165,7 @@ const Chart = ({ symbol, filters, timeRange }) => {
           height={400}
         >
           <BarPlot />
+          <ChartsGrid horizontal />
           <ChartsReferenceLine
             x={`${findNearest(chartData.xAxis[0].data, data.to_ltp)}`}
             labelStyle={{ fontSize: "10", lineHeight: 1.2 }}
@@ -171,6 +173,7 @@ const Chart = ({ symbol, filters, timeRange }) => {
             labelAlign="start"
           />
           <ChartsXAxis label="X axis" axisId="x-axis-id" />
+          <ChartsYAxis />
         </ChartContainer>
       )}
     </Box>
