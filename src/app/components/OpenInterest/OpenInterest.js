@@ -36,7 +36,7 @@ const OpenInterest = () => {
         setTimeRange(defaultRange);
         setTimeRangeValue([0, current]);
       }
-    }, 20 * 1000); // update every minute
+    }, 3 * 60 * 1000); // update every minute
 
     // Initial run immediately
     const current = getCurrentMinutesFromStart();
@@ -76,11 +76,11 @@ const OpenInterest = () => {
             </Stack>
           </Box>
 
-          <Stack gap={3}>
-            <Card variant="outlined">
+          <Stack gap={1} direction={"row"}>
+            <Card variant="outlined" sx={{ flexGrow: 1, minWidth: "50%" }}>
               <Chart timeRange={timeRange} symbol={"NIFTY"} />
             </Card>
-            <Card variant="outlined">
+            <Card variant="outlined" sx={{ flexGrow: 1, minWidth: "50%" }}>
               <Chart timeRange={timeRange} symbol={"BANKNIFTY"} />
             </Card>
           </Stack>

@@ -13,8 +13,13 @@ import {
   BarChart,
   BarPlot,
   ChartContainer,
+  ChartsAxisHighlight,
+  ChartsAxisTooltipContent,
   ChartsGrid,
+  ChartsItemTooltipContent,
   ChartsReferenceLine,
+  ChartsTooltip,
+  ChartsTooltipContainer,
   ChartsXAxis,
   ChartsYAxis,
   LinePlot,
@@ -162,9 +167,17 @@ const Chart = ({ symbol, filters, timeRange }) => {
               color: "#d86c6c",
             },
           ]}
-          height={400}
+          yAxis={[
+            {
+              valueFormatter: (value) =>
+                `${(value / 100000).toLocaleString()}k`,
+              label: "Call / Put OI",
+              // width: fixMargin ? 85 : undefined,
+            },
+          ]}
+          height={500}
         >
-          <BarPlot />
+          <BarPlot borderRadius={2} />
           <ChartsGrid horizontal />
           <ChartsReferenceLine
             x={`${findNearest(chartData.xAxis[0].data, data.to_ltp)}`}
@@ -172,8 +185,14 @@ const Chart = ({ symbol, filters, timeRange }) => {
             label={`${symbol}\n${data.to_ltp}`}
             labelAlign="start"
           />
-          <ChartsXAxis label="X axis" axisId="x-axis-id" />
+          <ChartsXAxis axisId="x-axis-id" />
           <ChartsYAxis />
+          <ChartsTooltipContainer>
+            <ChartsTooltip trigger="axis" />
+            <ChartsAxisTooltipContent />
+            <ChartsItemTooltipContent />
+          </ChartsTooltipContainer>
+          <ChartsAxisHighlight x="band" y="line" />
         </ChartContainer>
       )}
     </Box>
