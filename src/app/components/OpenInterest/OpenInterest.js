@@ -84,6 +84,14 @@ const OpenInterest = () => {
               <Chart timeRange={timeRange} symbol={"BANKNIFTY"} />
             </Card>
           </Stack>
+          <Stack gap={1} direction={"row"}>
+            <Card
+              variant="outlined"
+              sx={{ flexGrow: 1, minWidth: "50%", maxWidth: "50%" }}
+            >
+              <Chart timeRange={timeRange} symbol={"SENSEX"} />
+            </Card>
+          </Stack>
         </Stack>
       </Box>
     </Stack>
