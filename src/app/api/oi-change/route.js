@@ -1,7 +1,9 @@
 export async function POST(request) {
   const body = await request.json();
   const response = await fetch(
-    "https://oxide.sensibull.com/v1/compute/8/oi_graphs/oi_change_chart",
+    `https://oxide.sensibull.com/v1/compute/${
+      body.underlying === "SENSEX" ? 2 : 8
+    }/oi_graphs/oi_change_chart`,
     {
       method: "POST",
       body: JSON.stringify(body),

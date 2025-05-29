@@ -177,7 +177,7 @@ const Chart = ({ symbol, filters, timeRange }) => {
           ]}
           height={500}
         >
-          <BarPlot borderRadius={2} />
+          <BarPlot borderRadius={3} />
           <ChartsGrid horizontal />
           <ChartsReferenceLine
             x={`${findNearest(chartData.xAxis[0].data, data.to_ltp)}`}
