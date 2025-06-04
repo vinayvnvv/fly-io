@@ -1,6 +1,15 @@
 "use client";
 
-import { Box, Card, Slider, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  FormControlLabel,
+  FormGroup,
+  Slider,
+  Stack,
+  Switch,
+  Typography,
+} from "@mui/material";
 import { Chart } from "./Chart";
 import { formatTime } from "@/lib/utils";
 import { useEffect, useState } from "react";
@@ -21,6 +30,7 @@ function getCurrentMinutesFromStart() {
 const OpenInterest = () => {
   const [timeRangeValue, setTimeRangeValue] = useState([0, 375]);
   const [timeRange, setTimeRange] = useState([0, 375]);
+  const [OIChange, setOIChange] = useState(false);
   const handleRangeChange = (event, newValue) => {
     setTimeRange(newValue);
   };
@@ -74,14 +84,36 @@ const OpenInterest = () => {
               </Stack>
               <Box></Box>
             </Stack>
+            <Stack>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      defaultChecked
+                      checked={OIChange}
+                      onChange={(e) => setOIChange(e.target.checked)}
+                    />
+                  }
+                  label="IO Change"
+                />
+              </FormGroup>
+            </Stack>
           </Box>
 
           <Stack gap={1} direction={"row"}>
             <Card variant="outlined" sx={{ flexGrow: 1, minWidth: "50%" }}>
-              <Chart timeRange={timeRange} symbol={"NIFTY"} />
+              <Chart
+                OIChange={OIChange}
+                timeRange={timeRange}
+                symbol={"NIFTY"}
+              />
             </Card>
             <Card variant="outlined" sx={{ flexGrow: 1, minWidth: "50%" }}>
-              <Chart timeRange={timeRange} symbol={"BANKNIFTY"} />
+              <Chart
+                OIChange={OIChange}
+                timeRange={timeRange}
+                symbol={"BANKNIFTY"}
+              />
             </Card>
           </Stack>
           <Stack gap={1} direction={"row"}>
@@ -89,7 +121,11 @@ const OpenInterest = () => {
               variant="outlined"
               sx={{ flexGrow: 1, minWidth: "50%", maxWidth: "50%" }}
             >
-              <Chart timeRange={timeRange} symbol={"SENSEX"} />
+              <Chart
+                timeRange={timeRange}
+                symbol={"SENSEX"}
+                OIChange={OIChange}
+              />
             </Card>
           </Stack>
         </Stack>
