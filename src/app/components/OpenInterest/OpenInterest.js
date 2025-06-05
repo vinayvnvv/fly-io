@@ -13,6 +13,9 @@ import {
 import { Chart } from "./Chart";
 import { formatTime } from "@/lib/utils";
 import { useEffect, useState } from "react";
+import { Header } from "../AppBar";
+import ValueLabelComponent from "../ValueLabelComponent";
+import { AirbnbSlider } from "../AirbnbSlider";
 
 // Constants
 const startTime = 9 * 60 + 15; // 9:15 AM
@@ -58,12 +61,11 @@ const OpenInterest = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <Stack direction={"row"} gap={2}>
-      {/* <Card variant="outlined">Filters</Card> */}
-      <Box flexGrow={1}>
-        <Stack gap={2}>
-          <Box sx={{ p: 2 }}>
-            <Stack direction={"row"} gap={3} alignItems={"center"}>
+    <>
+      <Header>
+        <Box sx={{ p: 2 }}>
+          <Stack direction={"row"} spacing={2}>
+            <Stack flexGrow={1} direction={"row"} gap={3} alignItems={"center"}>
               <Stack
                 flexGrow={1}
                 direction={"row"}
@@ -72,11 +74,15 @@ const OpenInterest = () => {
               >
                 <Typography variant="subtitle2">9:15</Typography>
                 <Slider
+                  color="white"
                   value={timeRangeValue}
                   onChange={(_, v) => setTimeRangeValue(v)}
                   onChangeCommitted={handleRangeChange}
                   valueLabelDisplay="on"
                   min={0}
+                  slots={{
+                    valueLabel: ValueLabelComponent,
+                  }}
                   max={totalMinutes}
                   valueLabelFormat={formatTime}
                 />
@@ -89,6 +95,7 @@ const OpenInterest = () => {
                 <FormControlLabel
                   control={
                     <Switch
+                      color="white"
                       defaultChecked
                       checked={OIChange}
                       onChange={(e) => setOIChange(e.target.checked)}
@@ -98,39 +105,55 @@ const OpenInterest = () => {
                 />
               </FormGroup>
             </Stack>
-          </Box>
-
-          <Stack gap={1} direction={"row"}>
-            <Card variant="outlined" sx={{ flexGrow: 1, minWidth: "50%" }}>
-              <Chart
-                OIChange={OIChange}
-                timeRange={timeRange}
-                symbol={"NIFTY"}
-              />
-            </Card>
-            <Card variant="outlined" sx={{ flexGrow: 1, minWidth: "50%" }}>
-              <Chart
-                OIChange={OIChange}
-                timeRange={timeRange}
-                symbol={"BANKNIFTY"}
-              />
-            </Card>
           </Stack>
-          <Stack gap={1} direction={"row"}>
-            <Card
-              variant="outlined"
-              sx={{ flexGrow: 1, minWidth: "50%", maxWidth: "50%" }}
-            >
-              <Chart
-                timeRange={timeRange}
-                symbol={"SENSEX"}
-                OIChange={OIChange}
-              />
-            </Card>
+        </Box>
+      </Header>
+      <Stack direction={"row"} gap={2}>
+        {/* <Card variant="outlined">Filters</Card> */}
+        <Box flexGrow={1}>
+          <Stack gap={2}>
+            <Stack gap={1} direction={"row"}>
+              <Card variant="outlined" sx={{ flexGrow: 1, minWidth: "50%" }}>
+                <Chart
+                  OIChange={OIChange}
+                  timeRange={timeRange}
+                  symbol={"NIFTY"}
+                />
+              </Card>
+              <Card variant="outlined" sx={{ flexGrow: 1, minWidth: "50%" }}>
+                <Chart
+                  OIChange={OIChange}
+                  timeRange={timeRange}
+                  symbol={"BANKNIFTY"}
+                />
+              </Card>
+            </Stack>
+            <Stack gap={1} direction={"row"}>
+              <Card
+                variant="outlined"
+                sx={{ flexGrow: 1, minWidth: "50%", maxWidth: "50%" }}
+              >
+                <Chart
+                  timeRange={timeRange}
+                  symbol={"SENSEX"}
+                  OIChange={OIChange}
+                />
+              </Card>
+              <Card
+                variant="outlined"
+                sx={{ flexGrow: 1, minWidth: "50%", maxWidth: "50%" }}
+              >
+                <Chart
+                  timeRange={timeRange}
+                  symbol={"FINNIFTY"}
+                  OIChange={OIChange}
+                />
+              </Card>
+            </Stack>
           </Stack>
-        </Stack>
-      </Box>
-    </Stack>
+        </Box>
+      </Stack>
+    </>
   );
 };
 
